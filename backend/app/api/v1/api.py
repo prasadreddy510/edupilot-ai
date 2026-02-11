@@ -3,7 +3,7 @@ API v1 router - combines all endpoint routers
 """
 
 from fastapi import APIRouter
-from app.api.v1.endpoints import auth, subjects, topics, learning, worksheets
+from app.api.v1.endpoints import auth, subjects, topics, learning, worksheets, quizzes
 
 api_router = APIRouter()
 
@@ -13,6 +13,7 @@ api_router.include_router(subjects.router, prefix="/subjects", tags=["Subjects"]
 api_router.include_router(topics.router, prefix="/topics", tags=["Topics"])
 api_router.include_router(learning.router, prefix="/learning", tags=["Learning"])
 api_router.include_router(worksheets.router, prefix="/worksheets", tags=["Worksheets"])
+api_router.include_router(quizzes.router, prefix="/quizzes", tags=["Quizzes"])
 
 # Future routers will be added here:
 # api_router.include_router(students.router, prefix="/students", tags=["Students"])
