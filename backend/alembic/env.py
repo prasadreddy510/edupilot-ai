@@ -16,11 +16,23 @@ from app.database import Base
 from app.core.config import settings
 
 # Import all models so Alembic can detect them
-# These will be added in Phase 2
-# from app.models.user import User
-# from app.models.student import Student
-# from app.models.parent import Parent
-# ... etc
+from app.models import (
+    User,
+    Student,
+    Parent,
+    ParentStudentLink,
+    Subject,
+    Topic,
+    LearningSession,
+    Worksheet,
+    WorksheetSubmission,
+    Quiz,
+    QuizAttempt,
+    Conversation,
+    Message,
+    ProgressRecord,
+    WeakArea,
+)
 
 # this is the Alembic Config object
 config = context.config
