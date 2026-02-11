@@ -2,66 +2,88 @@
 Worksheet Pydantic schemas
 """
 
-from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import List, Dict, Any, Optional
+from pydantic import BaseModel, Field, validator
 
-from app.models.worksheet import DifficultyLevel
+
+class WorksheetGenerateRequest(BaseModel):
+    """Request to generate a new worksheet"""
+    topic_id: str = Field(..., description="Topic ID to generate worksheet for")
+    num_questions: int = Field(10, ge=5, le=20, description="Number of questions")
+    difficulty: str = Field("medium", description="Difficulty level: easy, medium, hard")
+
+    @validator("difficulty")
+    def validate_difficulty(cls, v):
+        if v not in ["easy", "medium", "hard"]:
+            raise ValueError("Difficulty must be easy, medium, or hard")
+        return v
 
 
-class QuestionSchema(BaseModel):
-    """Schema for a question"""
+class WorksheetResponse(BaseModel):
+    """Worksheet response with questions"""
     id: str
-    question_text: str
-    question_type: str  # mcq, short_answer, numerical, true_false
-    options: Optional[List[str]] = None
-    correct_answer: str
-    points: int = Field(..., ge=0)
-
-
-class WorksheetBase(BaseModel):
-    """Base worksheet schema"""
     student_id: str
     topic_id: str
-    title: str = Field(..., min_length=1, max_length=200)
-    difficulty_level: DifficultyLevel = DifficultyLevel.MEDIUM
-
-
-class WorksheetCreate(WorksheetBase):
-    """Schema for creating a worksheet"""
-    questions: List[QuestionSchema]
-    total_points: int = Field(..., ge=0)
-
-
-class WorksheetResponse(WorksheetBase):
-    """Schema for worksheet response"""
-    id: str
+    title: str
+    difficulty: str
+    total_questions: int
+    max_score: int
     questions: List[Dict[str, Any]]
-    total_points: int
     created_at: datetime
+    updated_at: datetime
 
     class Config:
         from_attributes = True
 
 
-class WorksheetSubmissionCreate(BaseModel):
-    """Schema for submitting worksheet answers"""
-    worksheet_id: str
-    student_id: str
-    answers: Dict[str, str]  # question_id: answer
+class WorksheetListResponse(BaseModel):
+    """Simplified worksheet list item"""
+    id: str
+    title: str
+    topic_id: str
+    topic_name: str
+    difficulty: str
+    total_questions: int
+    max_score: int
+    created_at: datetime
+    is_submitted: bool
+    latest_score: Optional[float] = None
+    latest_percentage: Optional[float] = None
+
+
+class WorksheetSubmitRequest(BaseModel):
+    """Request to submit worksheet answers"""
+    answers: Dict[str, str] = Field(
+        ..., description="Map of question_number to student answer"
+    )
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "answers": {
+                    "1": "Chlorophyll",
+                    "2": "The sunlight provides energy for the photosynthesis process",
+                    "3": "True",
+                }
+            }
+        }
 
 
 class WorksheetSubmissionResponse(BaseModel):
-    """Schema for worksheet submission response"""
+    """Worksheet submission with grading results"""
     id: str
     worksheet_id: str
     student_id: str
-    answers: Dict[str, Any]
-    score: int
+    answers: Dict[str, str]
+    score: float
     max_score: int
-    feedback: Optional[Dict[str, Any]] = None
+    percentage: float
+    graded_answers: List[Dict[str, Any]]
+    passed: bool
     submitted_at: datetime
-    graded_at: Optional[datetime] = None
+    created_at: datetime
+    updated_at: datetime
 
     class Config:
         from_attributes = True
