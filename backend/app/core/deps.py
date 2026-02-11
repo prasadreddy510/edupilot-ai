@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.core.security import decode_access_token
 from app.models import User
+from app.models.user import UserType
 import logging
 
 logger = logging.getLogger(__name__)
@@ -143,3 +144,49 @@ def get_optional_current_user(
     except Exception as e:
         logger.warning(f"Optional auth failed: {str(e)}")
         return None
+
+
+def get_current_student(
+    current_user: User = Depends(get_current_user)
+) -> User:
+    """
+    Get current user and verify they are a student
+
+    Args:
+        current_user: Current authenticated user
+
+    Returns:
+        Current user (verified as student)
+
+    Raises:
+        HTTPException: If user is not a student
+    """
+    if current_user.user_type != UserType.STUDENT:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This endpoint is only accessible to students"
+        )
+    return current_user
+
+
+def get_current_parent(
+    current_user: User = Depends(get_current_user)
+) -> User:
+    """
+    Get current user and verify they are a parent
+
+    Args:
+        current_user: Current authenticated user
+
+    Returns:
+        Current user (verified as parent)
+
+    Raises:
+        HTTPException: If user is not a parent
+    """
+    if current_user.user_type != UserType.PARENT:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This endpoint is only accessible to parents"
+        )
+    return current_user
