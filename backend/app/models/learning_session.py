@@ -2,7 +2,7 @@
 Learning Session model - Time tracking for student learning
 """
 
-from sqlalchemy import Column, String, Integer, ForeignKey, DateTime, func
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey, DateTime, func
 from sqlalchemy.orm import relationship
 import uuid
 
@@ -16,10 +16,12 @@ class LearningSession(Base):
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     student_id = Column(String(36), ForeignKey("students.id", ondelete="CASCADE"), nullable=False)
     topic_id = Column(String(36), ForeignKey("topics.id", ondelete="CASCADE"), nullable=False)
-    duration_seconds = Column(Integer, default=0)  # Time spent in seconds
-    started_at = Column(DateTime(timezone=True), nullable=False)
-    ended_at = Column(DateTime(timezone=True), nullable=True)
+    start_time = Column(DateTime(timezone=True), nullable=False)
+    end_time = Column(DateTime(timezone=True), nullable=True)
+    duration_minutes = Column(Integer, default=0)
+    completed = Column(Boolean, default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # Relationships
     student = relationship("Student", back_populates="learning_sessions")

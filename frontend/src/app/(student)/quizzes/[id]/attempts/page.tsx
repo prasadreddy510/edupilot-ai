@@ -66,7 +66,7 @@ export default function QuizAttemptsPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/quizzes"
+            href="/quizzes"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -84,7 +84,7 @@ export default function QuizAttemptsPage() {
             </div>
 
             <Link
-              href={`/student/quizzes/${quizId}`}
+              href={`/quizzes/${quizId}`}
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
             >
               Take Quiz Again
@@ -172,7 +172,7 @@ export default function QuizAttemptsPage() {
                   Start your first quiz attempt
                 </p>
                 <Link
-                  href={`/student/quizzes/${quizId}`}
+                  href={`/quizzes/${quizId}`}
                   className="mt-4 inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
                 >
                   Start Quiz

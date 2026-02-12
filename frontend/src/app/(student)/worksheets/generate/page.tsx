@@ -70,7 +70,7 @@ export default function GenerateWorksheetPage() {
     },
     onSuccess: (worksheet) => {
       toast.success('Worksheet generated successfully!')
-      router.push(`/student/worksheets/${worksheet.id}`)
+      router.push(`/worksheets/${worksheet.id}`)
     },
     onError: (error: any) => {
       toast.error(error.message || 'Failed to generate worksheet')
@@ -95,7 +95,7 @@ export default function GenerateWorksheetPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/worksheets"
+            href="/worksheets"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />

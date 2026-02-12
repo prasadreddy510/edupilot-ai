@@ -58,7 +58,7 @@ export default function QuizResultPage() {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900">No submission found</h2>
           <Link
-            href={`/student/quizzes/${quizId}`}
+            href={`/quizzes/${quizId}`}
             className="mt-4 inline-block text-blue-600 hover:text-blue-700"
           >
             Start Quiz
@@ -83,7 +83,7 @@ export default function QuizResultPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/quizzes"
+            href="/quizzes"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -212,20 +212,20 @@ export default function QuizResultPage() {
 
             <div className="flex items-center justify-center gap-4 p-6">
               <Link
-                href={`/student/quizzes/${quizId}`}
+                href={`/quizzes/${quizId}`}
                 className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50"
               >
                 <RotateCcw className="h-4 w-4" />
                 Try Again
               </Link>
               <Link
-                href={`/student/quizzes/${quizId}/attempts`}
+                href={`/quizzes/${quizId}/attempts`}
                 className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50"
               >
                 View All Attempts
               </Link>
               <Link
-                href="/student/quizzes/generate"
+                href="/quizzes/generate"
                 className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
               >
                 Start New Quiz

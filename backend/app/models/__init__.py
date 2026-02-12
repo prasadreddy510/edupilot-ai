@@ -9,7 +9,7 @@ from app.models.parent_student_link import ParentStudentLink, RelationshipType
 from app.models.subject import Subject
 from app.models.topic import Topic
 from app.models.learning_session import LearningSession
-from app.models.worksheet import Worksheet, DifficultyLevel
+from app.models.worksheet import Worksheet
 from app.models.worksheet_submission import WorksheetSubmission
 from app.models.quiz import Quiz
 from app.models.quiz_attempt import QuizAttempt
@@ -29,7 +29,6 @@ __all__ = [
     "Topic",
     "LearningSession",
     "Worksheet",
-    "DifficultyLevel",
     "WorksheetSubmission",
     "Quiz",
     "QuizAttempt",

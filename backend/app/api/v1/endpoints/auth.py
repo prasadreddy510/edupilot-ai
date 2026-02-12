@@ -263,6 +263,65 @@ def get_current_user_info(
         )
 
 
+@router.post("/dev-login", response_model=LoginResponse)
+def dev_login(
+    db: Session = Depends(get_db)
+):
+    """
+    Development-only login that bypasses Firebase.
+    Creates or retrieves a test student account.
+    """
+    if settings.ENVIRONMENT != "development":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Dev login is only available in development mode"
+        )
+
+    phone_number = "+919999999999"
+
+    # Find or create test user
+    user = db.query(User).filter(User.phone_number == phone_number).first()
+
+    if not user:
+        user = User(
+            id=str(uuid.uuid4()),
+            phone_number=phone_number,
+            user_type=UserType.STUDENT,
+            is_active="1"
+        )
+        db.add(user)
+        db.flush()
+
+        student = Student(
+            id=str(uuid.uuid4()),
+            user_id=user.id,
+            name="Test Student",
+            grade=8,
+        )
+        db.add(student)
+        db.commit()
+        db.refresh(user)
+
+    student = db.query(Student).filter(Student.user_id == user.id).first()
+
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.id, "type": user.user_type.value},
+        expires_delta=access_token_expires
+    )
+
+    user_response = UserResponse.model_validate(user)
+    student_response = StudentResponse.model_validate(student) if student else None
+
+    return LoginResponse(
+        access_token=access_token,
+        token_type="bearer",
+        user=user_response,
+        student=student_response,
+        parent=None
+    )
+
+
 @router.post("/logout", response_model=MessageResponse)
 def logout_user(current_user: User = Depends(get_current_user)):
     """

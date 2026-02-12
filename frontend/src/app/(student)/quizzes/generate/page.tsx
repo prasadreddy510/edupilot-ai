@@ -75,7 +75,7 @@ export default function GenerateQuizPage() {
     },
     onSuccess: (quiz) => {
       toast.success('Quiz generated successfully!')
-      router.push(`/student/quizzes/${quiz.id}`)
+      router.push(`/quizzes/${quiz.id}`)
     },
     onError: (error: any) => {
       toast.error(error.message || 'Failed to generate quiz')
@@ -102,7 +102,7 @@ export default function GenerateQuizPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/quizzes"
+            href="/quizzes"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />

@@ -8,31 +8,21 @@ from app.schemas.parent import ParentBase, ParentCreate, ParentUpdate, ParentRes
 from app.schemas.subject import SubjectBase, SubjectCreate, SubjectUpdate, SubjectResponse
 from app.schemas.topic import TopicBase, TopicCreate, TopicUpdate, TopicResponse
 from app.schemas.worksheet import (
-    QuestionSchema,
-    WorksheetBase,
-    WorksheetCreate,
     WorksheetResponse,
-    WorksheetSubmissionCreate,
     WorksheetSubmissionResponse,
 )
 from app.schemas.quiz import (
-    QuizBase,
-    QuizCreate,
-    QuizUpdate,
     QuizResponse,
-    QuizAttemptCreate,
-    QuizAttemptSubmit,
     QuizAttemptResponse,
 )
-from app.schemas.conversation import (
-    MessageBase,
+from app.schemas.doubt import (
     MessageCreate,
     MessageResponse,
-    ConversationBase,
     ConversationCreate,
-    ConversationUpdate,
     ConversationResponse,
-    ConversationWithMessages,
+    ConversationListResponse,
+    ChatRequest,
+    ChatResponse,
 )
 from app.schemas.progress import (
     ProgressRecordBase,
@@ -71,29 +61,19 @@ __all__ = [
     "TopicUpdate",
     "TopicResponse",
     # Worksheet
-    "QuestionSchema",
-    "WorksheetBase",
-    "WorksheetCreate",
     "WorksheetResponse",
-    "WorksheetSubmissionCreate",
     "WorksheetSubmissionResponse",
     # Quiz
-    "QuizBase",
-    "QuizCreate",
-    "QuizUpdate",
     "QuizResponse",
-    "QuizAttemptCreate",
-    "QuizAttemptSubmit",
     "QuizAttemptResponse",
-    # Conversation
-    "MessageBase",
+    # Conversation / Doubts
     "MessageCreate",
     "MessageResponse",
-    "ConversationBase",
     "ConversationCreate",
-    "ConversationUpdate",
     "ConversationResponse",
-    "ConversationWithMessages",
+    "ConversationListResponse",
+    "ChatRequest",
+    "ChatResponse",
     # Progress
     "ProgressRecordBase",
     "ProgressRecordCreate",

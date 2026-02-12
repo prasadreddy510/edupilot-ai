@@ -103,7 +103,7 @@ export default function ChatPage() {
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
-              href="/student/doubts"
+              href="/doubts"
               className="rounded-lg p-2 text-gray-600 transition hover:bg-gray-100"
             >
               <ArrowLeft className="h-5 w-5" />

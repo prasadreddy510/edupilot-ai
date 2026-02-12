@@ -8,7 +8,8 @@ from app.core.deps import get_db, get_current_student
 from app.models.user import User
 from app.models.student import Student
 from app.models.topic import Topic
-from app.models.worksheet import Worksheet, WorksheetSubmission
+from app.models.worksheet import Worksheet
+from app.models.worksheet_submission import WorksheetSubmission
 from app.schemas.worksheet import (
     WorksheetGenerateRequest,
     WorksheetResponse,

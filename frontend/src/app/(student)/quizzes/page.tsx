@@ -42,7 +42,7 @@ export default function QuizzesPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/dashboard"
+            href="/dashboard"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -58,7 +58,7 @@ export default function QuizzesPage() {
             </div>
 
             <Link
-              href="/student/quizzes/generate"
+              href="/quizzes/generate"
               className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
             >
               <Plus className="h-4 w-4" />
@@ -92,7 +92,7 @@ export default function QuizzesPage() {
               Start your first quiz to test your knowledge
             </p>
             <Link
-              href="/student/quizzes/generate"
+              href="/quizzes/generate"
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
             >
               <Plus className="h-4 w-4" />
@@ -117,10 +117,10 @@ function QuizCard({ quiz }: { quiz: QuizListItem }) {
   const handleClick = () => {
     if (quiz.total_attempts > 0) {
       // View stats/attempts
-      router.push(`/student/quizzes/${quiz.id}/attempts`)
+      router.push(`/quizzes/${quiz.id}/attempts`)
     } else {
       // Start first attempt
-      router.push(`/student/quizzes/${quiz.id}`)
+      router.push(`/quizzes/${quiz.id}`)
     }
   }
 

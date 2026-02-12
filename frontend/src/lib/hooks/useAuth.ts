@@ -119,7 +119,7 @@ export const useAuth = () => {
 
       // Redirect based on user type
       if (response.user.user_type === 'student') {
-        router.push('/student/dashboard')
+        router.push('/dashboard')
       } else {
         router.push('/parent/dashboard')
       }
@@ -152,7 +152,7 @@ export const useAuth = () => {
 
       // Redirect based on user type
       if (response.user.user_type === 'student') {
-        router.push('/student/dashboard')
+        router.push('/dashboard')
       } else {
         router.push('/parent/dashboard')
       }

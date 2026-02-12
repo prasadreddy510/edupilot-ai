@@ -290,7 +290,7 @@ def send_message(
         conversation_id=conversation_id,
         role="assistant",
         content=ai_result["response"],
-        metadata={
+        extra_metadata={
             "sources": ai_result["sources"],
             "has_context": ai_result["has_context"],
         },
@@ -403,7 +403,7 @@ def quick_ask(
         conversation_id="quick-ask",
         role="assistant",
         content=ai_result["response"],
-        metadata={
+        extra_metadata={
             "sources": ai_result["sources"],
             "has_context": ai_result["has_context"],
         },

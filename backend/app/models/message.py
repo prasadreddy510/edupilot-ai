@@ -24,8 +24,10 @@ class Message(Base):
     conversation_id = Column(String(36), ForeignKey("conversations.id", ondelete="CASCADE"), nullable=False)
     role = Column(Enum(MessageRole), nullable=False)
     content = Column(Text, nullable=False)
-    sources = Column(JSON, nullable=True)  # Array of source references (NCERT page numbers, etc.)
+    sources = Column(JSON, nullable=True)  # Array of source references
+    extra_metadata = Column(JSON, nullable=True)  # Additional metadata
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # Relationships
     conversation = relationship("Conversation", back_populates="messages")

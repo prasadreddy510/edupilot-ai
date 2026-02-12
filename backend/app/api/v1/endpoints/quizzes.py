@@ -8,7 +8,8 @@ from app.core.deps import get_db, get_current_student
 from app.models.user import User
 from app.models.student import Student
 from app.models.topic import Topic
-from app.models.quiz import Quiz, QuizAttempt
+from app.models.quiz import Quiz
+from app.models.quiz_attempt import QuizAttempt
 from app.schemas.quiz import (
     QuizGenerateRequest,
     QuizResponse,

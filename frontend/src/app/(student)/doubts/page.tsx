@@ -50,7 +50,7 @@ export default function DoubtsPage() {
       setNewConvTitle('')
       setShowNewConvDialog(false)
       queryClient.invalidateQueries({ queryKey: ['conversations'] })
-      router.push(`/student/doubts/${conversation.id}`)
+      router.push(`/doubts/${conversation.id}`)
     },
     onError: (error: any) => {
       toast.error(error.message || 'Failed to create conversation')
@@ -88,7 +88,7 @@ export default function DoubtsPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/dashboard"
+            href="/dashboard"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -245,7 +245,7 @@ function ConversationCard({
 
   return (
     <div
-      onClick={() => router.push(`/student/doubts/${conversation.id}`)}
+      onClick={() => router.push(`/doubts/${conversation.id}`)}
       className="group cursor-pointer rounded-xl border border-gray-200 bg-white p-6 transition hover:shadow-lg"
     >
       <div className="flex items-start justify-between">

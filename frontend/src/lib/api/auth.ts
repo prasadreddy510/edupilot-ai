@@ -52,4 +52,11 @@ export const authApi = {
   refreshToken: async (): Promise<AuthResponse> => {
     return apiClient.post<AuthResponse>('/api/v1/auth/refresh')
   },
+
+  /**
+   * Dev-only login (bypasses Firebase)
+   */
+  devLogin: async (): Promise<AuthResponse> => {
+    return apiClient.post<AuthResponse>('/api/v1/auth/dev-login')
+  },
 }

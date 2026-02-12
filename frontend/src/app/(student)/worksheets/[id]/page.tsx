@@ -37,7 +37,7 @@ export default function WorksheetPage() {
     },
     onSuccess: (submission) => {
       toast.success('Worksheet submitted successfully!')
-      router.push(`/student/worksheets/${worksheetId}/result`)
+      router.push(`/worksheets/${worksheetId}/result`)
     },
     onError: () => {
       toast.error('Failed to submit worksheet')
@@ -85,7 +85,7 @@ export default function WorksheetPage() {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900">Worksheet not found</h2>
           <Link
-            href="/student/worksheets"
+            href="/worksheets"
             className="mt-4 inline-block text-blue-600 hover:text-blue-700"
           >
             Back to Worksheets
@@ -105,7 +105,7 @@ export default function WorksheetPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link
-              href="/student/worksheets"
+              href="/worksheets"
               className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
             >
               <ArrowLeft className="h-4 w-4" />

@@ -2,7 +2,7 @@
 Quiz Attempt model - Quiz history and scores
 """
 
-from sqlalchemy import Column, String, Integer, ForeignKey, DateTime, func, JSON
+from sqlalchemy import Column, String, Integer, Float, Boolean, ForeignKey, DateTime, func, JSON
 from sqlalchemy.orm import relationship
 import uuid
 
@@ -19,10 +19,16 @@ class QuizAttempt(Base):
     answers = Column(JSON, nullable=False)  # Dict of question_id: answer
     score = Column(Integer, default=0)  # Points earned
     max_score = Column(Integer, default=0)  # Total possible points
-    time_taken_seconds = Column(Integer, default=0)  # Time taken
+    percentage = Column(Float, nullable=True)
+    graded_answers = Column(JSON, nullable=True)  # List of graded answer objects
+    passed = Column(Boolean, nullable=True)
+    time_taken_seconds = Column(Integer, default=0)
+    time_exceeded = Column(Boolean, nullable=True)
+    improvement_data = Column(JSON, nullable=True)
     started_at = Column(DateTime(timezone=True), nullable=False)
     submitted_at = Column(DateTime(timezone=True), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # Relationships
     quiz = relationship("Quiz", back_populates="attempts")

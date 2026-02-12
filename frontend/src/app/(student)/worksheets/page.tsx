@@ -43,7 +43,7 @@ export default function WorksheetsPage() {
       <header className="border-b bg-white">
         <div className="container mx-auto px-4 py-6">
           <Link
-            href="/student/dashboard"
+            href="/dashboard"
             className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -59,7 +59,7 @@ export default function WorksheetsPage() {
             </div>
 
             <Link
-              href="/student/worksheets/generate"
+              href="/worksheets/generate"
               className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
             >
               <Plus className="h-4 w-4" />
@@ -93,7 +93,7 @@ export default function WorksheetsPage() {
               Generate your first worksheet to start practicing
             </p>
             <Link
-              href="/student/worksheets/generate"
+              href="/worksheets/generate"
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
             >
               <Plus className="h-4 w-4" />
@@ -118,10 +118,10 @@ function WorksheetCard({ worksheet }: { worksheet: WorksheetListItem }) {
   const handleClick = () => {
     if (worksheet.is_submitted) {
       // View results
-      router.push(`/student/worksheets/${worksheet.id}/result`)
+      router.push(`/worksheets/${worksheet.id}/result`)
     } else {
       // Start worksheet
-      router.push(`/student/worksheets/${worksheet.id}`)
+      router.push(`/worksheets/${worksheet.id}`)
     }
   }
 

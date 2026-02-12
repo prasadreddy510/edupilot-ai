@@ -2,19 +2,11 @@
 Worksheet model - Generated practice sheets
 """
 
-from sqlalchemy import Column, String, Integer, ForeignKey, Text, Enum, DateTime, func, JSON
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text, DateTime, func, JSON
 from sqlalchemy.orm import relationship
-import enum
 import uuid
 
 from app.database import Base
-
-
-class DifficultyLevel(str, enum.Enum):
-    """Difficulty level enumeration"""
-    EASY = "easy"
-    MEDIUM = "medium"
-    HARD = "hard"
 
 
 class Worksheet(Base):
@@ -26,9 +18,11 @@ class Worksheet(Base):
     topic_id = Column(String(36), ForeignKey("topics.id", ondelete="CASCADE"), nullable=False)
     title = Column(String(200), nullable=False)
     questions = Column(JSON, nullable=False)  # Array of question objects
-    difficulty_level = Column(Enum(DifficultyLevel), default=DifficultyLevel.MEDIUM)
-    total_points = Column(Integer, default=0)
+    difficulty = Column(String(20), default="medium")  # easy, medium, hard
+    total_questions = Column(Integer, default=0)
+    max_score = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # Relationships
     student = relationship("Student", back_populates="worksheets")

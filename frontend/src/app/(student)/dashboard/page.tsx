@@ -10,7 +10,7 @@ import { learningApi, LearningSessionStats } from '@/lib/api/learning'
 import {
   BookOpen,
   Calculator,
-  Flask,
+  FlaskConical,
   Globe,
   Languages,
   Leaf,
@@ -23,7 +23,7 @@ import { Subject } from '@/types'
 
 const SUBJECT_ICONS: { [key: string]: any } = {
   Mathematics: Calculator,
-  Science: Flask,
+  Science: FlaskConical,
   'Social Science': Globe,
   English: BookOpen,
   Hindi: Languages,
@@ -96,13 +96,13 @@ export default function StudentDashboard() {
             </div>
             <div className="flex items-center gap-4">
               <Link
-                href="/student/profile"
+                href="/profile"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
                 Profile
               </Link>
               <Link
-                href="/student/progress"
+                href="/progress"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
                 Progress
@@ -183,25 +183,25 @@ export default function StudentDashboard() {
           <h2 className="mb-6 text-2xl font-bold text-gray-900">Quick Actions</h2>
           <div className="grid gap-6 md:grid-cols-2">
             <ActionCard
-              href="/student/worksheets"
+              href="/worksheets"
               icon="📝"
               title="Practice Worksheets"
               description="Generate AI-powered worksheets for any topic"
             />
             <ActionCard
-              href="/student/quizzes"
+              href="/quizzes"
               icon="🎯"
               title="Take a Quiz"
               description="Test your knowledge with timed quizzes"
             />
             <ActionCard
-              href="/student/doubts"
+              href="/doubts"
               icon="💬"
               title="Ask a Doubt"
               description="Get instant help from AI tutor"
             />
             <ActionCard
-              href="/student/progress"
+              href="/progress"
               icon="📊"
               title="View Progress"
               description="See your learning journey and achievements"
@@ -252,7 +252,7 @@ function SubjectCard({ subject }: { subject: Subject }) {
 
   return (
     <Link
-      href={`/student/subjects/${subject.id}`}
+      href={`/subjects/${subject.id}`}
       className="group rounded-xl border border-gray-200 bg-white p-6 transition hover:shadow-lg"
     >
       <div className="flex items-start justify-between">

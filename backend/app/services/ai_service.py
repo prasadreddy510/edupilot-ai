@@ -340,3 +340,4 @@ Guidelines:
 
 # Global instance
 claude_service = ClaudeService()
+ai_service = claude_service

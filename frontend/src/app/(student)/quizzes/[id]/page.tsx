@@ -68,7 +68,7 @@ export default function QuizPage() {
         ? 'Time\'s up! Quiz auto-submitted.'
         : 'Quiz submitted successfully!'
       toast.success(message)
-      router.push(`/student/quizzes/${quizId}/result`)
+      router.push(`/quizzes/${quizId}/result`)
     },
     onError: () => {
       toast.error('Failed to submit quiz')
@@ -161,7 +161,7 @@ export default function QuizPage() {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900">Quiz not found</h2>
           <Link
-            href="/student/quizzes"
+            href="/quizzes"
             className="mt-4 inline-block text-blue-600 hover:text-blue-700"
           >
             Back to Quizzes
@@ -178,7 +178,7 @@ export default function QuizPage() {
         <header className="border-b bg-white">
           <div className="container mx-auto px-4 py-6">
             <Link
-              href="/student/quizzes"
+              href="/quizzes"
               className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
             >
               <ArrowLeft className="h-4 w-4" />

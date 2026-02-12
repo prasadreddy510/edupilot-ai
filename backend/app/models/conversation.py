@@ -17,6 +17,7 @@ class Conversation(Base):
     student_id = Column(String(36), ForeignKey("students.id", ondelete="CASCADE"), nullable=False)
     topic_id = Column(String(36), ForeignKey("topics.id", ondelete="SET NULL"), nullable=True)
     title = Column(String(200), nullable=False)
+    subject = Column(String(100), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 

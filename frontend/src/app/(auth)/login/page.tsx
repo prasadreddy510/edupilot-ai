@@ -3,18 +3,41 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Phone, ArrowRight, Loader2 } from 'lucide-react'
+import { Phone, ArrowRight, Loader2, Zap } from 'lucide-react'
 import { OTPInput } from '@/components/auth/OTPInput'
 import { useAuth } from '@/lib/hooks/useAuth'
+import { authApi } from '@/lib/api/auth'
+import { useAuthStore } from '@/lib/store/authStore'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 export default function LoginPage() {
   const router = useRouter()
   const { sendOTP, verifyOTP, login } = useAuth()
 
+  const { setAuth } = useAuthStore()
   const [step, setStep] = useState<'phone' | 'otp'>('phone')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleDevLogin = async () => {
+    try {
+      setIsLoading(true)
+      const response = await authApi.devLogin()
+      setAuth({
+        user: response.user,
+        student: response.student,
+        parent: response.parent,
+        accessToken: response.access_token,
+      })
+      toast.success('Dev login successful!')
+      router.push('/dashboard')
+    } catch (error: any) {
+      toast.error(error.response?.data?.detail || 'Dev login failed')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -147,6 +170,23 @@ export default function LoginPage() {
                   Register here
                 </Link>
               </div>
+
+              {/* Dev Login */}
+              {process.env.NEXT_PUBLIC_ENVIRONMENT === 'development' && (
+                <div className="mt-4 border-t pt-4">
+                  <button
+                    onClick={handleDevLogin}
+                    disabled={isLoading}
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3 font-medium text-white hover:bg-amber-600 disabled:cursor-not-allowed disabled:bg-gray-400"
+                  >
+                    <Zap className="h-5 w-5" />
+                    Dev Login (Test Student)
+                  </button>
+                  <p className="mt-1 text-center text-xs text-gray-400">
+                    Bypasses Firebase — development only
+                  </p>
+                </div>
+              )}
             </>
           ) : (
             <>

@@ -82,7 +82,7 @@ export default function ProgressDashboard() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-4">
             <Link
-              href="/student/dashboard"
+              href="/dashboard"
               className="rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <ArrowLeft className="h-5 w-5" />
