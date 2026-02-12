@@ -23,7 +23,7 @@ class ClaudeService:
         else:
             self.client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
 
-        self.model = "claude-3-5-sonnet-20241022"  # Latest Claude model
+        self.model = "claude-sonnet-4-5-20250929"  # Latest Claude model
 
     def generate_completion(
         self,
