@@ -33,7 +33,7 @@ export const learningApi = {
     sessionId: string,
     completed: boolean = false
   ): Promise<LearningSession> => {
-    return apiClient.patch(`/api/v1/learning/sessions/${sessionId}`, {
+    return apiClient.patch(`/api/v1/learning/sessions/${sessionId}/end`, {
       completed,
     })
   },

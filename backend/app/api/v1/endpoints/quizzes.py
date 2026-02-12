@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
@@ -231,7 +231,7 @@ def start_quiz_attempt(
         id=str(uuid.uuid4()),
         quiz_id=quiz.id,
         student_id=student.id,
-        started_at=datetime.utcnow(),
+        started_at=datetime.now(timezone.utc),
         answers={},
     )
 
@@ -301,7 +301,7 @@ def submit_quiz(
         )
 
     # Calculate time taken
-    time_taken_seconds = int((datetime.utcnow() - attempt.started_at).total_seconds())
+    time_taken_seconds = int((datetime.now(timezone.utc) - attempt.started_at).total_seconds())
 
     # Grade the quiz
     grading_result = quiz_service.grade_quiz(
@@ -331,7 +331,7 @@ def submit_quiz(
     )
 
     # Update attempt with results
-    attempt.submitted_at = datetime.utcnow()
+    attempt.submitted_at = datetime.now(timezone.utc)
     attempt.answers = submission.answers
     attempt.score = grading_result["total_score"]
     attempt.max_score = grading_result["max_score"]

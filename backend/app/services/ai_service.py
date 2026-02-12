@@ -274,7 +274,8 @@ Return ONLY a valid JSON object with the grading result."""
         user_message: str,
         conversation_history: List[Dict[str, str]],
         context: Optional[str] = None,
-        grade: int = 5
+        grade: int = 5,
+        subject: Optional[str] = None
     ) -> str:
         """
         Generate chat response for doubt clearing
@@ -288,7 +289,8 @@ Return ONLY a valid JSON object with the grading result."""
         Returns:
             AI response
         """
-        system_prompt = f"""You are an expert AI tutor for NCERT curriculum (Grade {grade}).
+        subject_str = f" {subject}" if subject else ""
+        system_prompt = f"""You are an expert AI tutor for NCERT{subject_str} curriculum (Grade {grade}).
 Help students clear their doubts with patience and clarity.
 
 Guidelines:
